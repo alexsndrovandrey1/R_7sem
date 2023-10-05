@@ -50,7 +50,7 @@ nrow(weather)
 ```
 data_list <- list(airlines, airports, flights, planes, weather)
 row_data <- sapply(data_list, nrow)
-print(row_data)
+cat(row_data)
 ```
 Мы создаем список data_list, содержащий пять различных наборов данных (airlines, airports, flights, planes, weather), далее функция sapply применяется к списку для того чтобы вычислить кол-во строк в каждом датафрейме. Результат представляет собой вектор row_data, содержащий кол-во строк каждого датафрейма и выводим это на экран.
 
@@ -75,7 +75,7 @@ ncol(weather)
 ```
 data_list2 <- list(airlines, airports, flights, planes, weather)
 col_data <- sapply(data_list2, ncol)
-print(col_data)
+cat(col_data)
 ```
 
 Мы создаем список data_list2, содержащий пять различных наборов данных (airlines, airports, flights, planes, weather), далее функция sapply применяется к списку для того чтобы вычислить кол-во столбцов в каждом датафрейме. Результат представляет собой вектор col_data, содержащий кол-во столбцов каждого датафрейма и выводим это на экран.
@@ -86,15 +86,15 @@ print(col_data)
 
 ```
 dataframe <- airlines %>% glimpse()
-print(dataframe)
+dataframe
 dataframe2 <- airports %>% glimpse()
-print(dataframe2)
+dataframe2
 dataframe3 <- flights %>% glimpse()
-print(dataframe3)
+dataframe3
 dataframe4 <- planes %>% glimpse()
-print(dataframe4)
+dataframe4
 dataframe5 <- weather %>% glimpse()
-print(dataframe5)
+dataframe5
 ```
 
 Присваиваем переменным dataframe, dataframe2, dataframe3, dataframe4, dataframe5 результат работы функции glimpse(), которая показывает краткую информацию о структуре датафрейма(кол-во строк, столбцов и типов данных в каждом столбце), выводим результат на экран.
@@ -112,7 +112,7 @@ carriers <- airlines %>%
   select(carrier) %>%
   distinct() %>%
   nrow()
-print(carriers)
+cat(carriers)
 ```
 
 Присваиваем переменной carriers результаты работы функций: select(carrier), которая выбирает столбец carrier; distinct(), которая удаляет дубликаты значений в столбце carrier; nrow(), которая возвращает кол-во строк и выводим результат на экран.
@@ -125,7 +125,7 @@ print(carriers)
 flights_JFK <- flights %>%
   filter(month == 5 & dest == "JFK") %>%
   nrow()
-print(flights_JFK)
+cat(flights_JFK)
 ```
 
 Присваиваем переменной flights_JFK результат работы функций: filter(month == 5 & dest == "JFK"), которая выбирает только те строки, где значение столбца month равно 5 и значение столбца dest равно JFK; nrow(), которая возвращает количество строк в наборе данных, удовлетворяющих условиям фильтрации и выводим результат на экран.
@@ -138,7 +138,7 @@ print(flights_JFK)
 N_airports <- airports %>%
   arrange(desc(lat)) %>%
   head(1)
-print(N_airports)
+cat(N_airports$name)
 ```
 
 Присваиваем переменной N_airports значение работы функций: arrange(desc(lat)), которая сортирует строки в порядке убывания результат столбца lat (широта); head(1), которая возвращает первую строку (то есть аэропорт с наибольшей широтой) и выводим результат работы на экран.
@@ -151,7 +151,7 @@ print(N_airports)
 alpine_airport <- airports %>%
   arrange(desc(alt)) %>%
   head(1)
-print(alpine_airport)
+cat(alpine_airport$name)
 ```
 
 Присваиваем переменной alpine_airport результат работы функций: arrange(desc(alt)),  которая сортирует строки в порядке убывания значения столбца alt (высота над уровнем моря); head(1), которая возвращает первую строку (то есть аэропорт с наибольшей высотой над уровнем моря) и выводим на экран.
@@ -165,7 +165,7 @@ bort_number_old_plane <- planes %>%
   arrange(year) %>%
   head(10) %>%
   select(tailnum)
-print(bort_number_old_plane)
+bort_number_old_plane
 ```
 Присваиваем переменной bort_number_old_plane результат работы функций: arrange(year), которая сортирует строки в порядке возвраствния значения столбца year (год выпуска самолета); head(10), которая возвращает первые 10 строк (то есть 10 самых старых самолета); select(tailnum), которая выбирает только столбец tailnum (бортовой номер) и выводим на экран.
 
@@ -178,7 +178,7 @@ temp_sep <- weather %>%
   filter(month == 9 & origin == "JFK") %>%
   summarise(avg_temp = mean(temp, na.rm = TRUE))
 grad_C <- (5/9) * (temp_sep$avg_temp - 32)
-print(grad_C)
+cat(grad_C)
 ```
 
 Присваиваем переменной temp_sep результат работы функций: filter(month == 9 & origin == "JFK"), которая выбирает только те строки, где значение столбца month равно 9 и значение столбца origin равно "JFK" (аэропорт JFK); summarise(avg_temp = mean(temp, na.rm = TRUE)), которая вычисляет среднее значение столбца temp для выбранных строк и результат сохраняется в столбец avg_temp; присваиваем переменной grad_c значение в градусах Цельсия по формуле (5/9) * (temp_sep$avg_temp - 32), где temp_sep$avg_temp - среднее значение температуры, вычисленное на предыдущем этапе и выводим на экран.
@@ -194,7 +194,7 @@ col_fly <- flights %>%
   summarize(num_flights = n()) %>% 
   arrange(desc(num_flights)) %>% 
   head(1)
-print(col_fly)
+col_fly
 ```
 
 Присваиваем переменной col_fly результат работы функций: filter(month == 6), которая выбирает те строки, где month = 6; group_by(carrier), которая группирует строки по значению столбца carrier; summarize(num_flights = n()), которая вычисляет кол-во строк в каждой группе и результат сохраняем в столбец num_flights; arrange(desc(num_flights)), которая сортирует строки в порядке убывания по значению столбца num_flights; head(1), которая возвращает первую строку (т.е. авиакомпанию с наибольшим кол-во рейсов в июне) и выводим на экран.
@@ -210,7 +210,7 @@ flight_delays <- flights %>%
   summarize(num_delays = sum(arr_delay > 0, na.rm = TRUE)) %>% 
   arrange(desc(num_delays)) %>% 
   head(1)
-print(flight_delays)
+flight_delays
 ```
 
 Присваиваем переменной flight_delays результат работы функций: filter(year == 2013), котрая выбирает те строки, где year = 2013; group_by(carrier), которая группирует строки по значению carrier; summarize(num_delays = sum(arr_delay > 0, na.rm = TRUE)), которая вычисляет кол-во строк в каждой группе, где значение столбца arr_delay больше 0 (т.е. количество задержек прибытия рейсов для каждой авиакомпании в 2013 году), функция na.rm = TRUE используется для игнорирования пропущенных значений; arrange(desc(num_delays)), которая сортирует строки по убыванию значения столбца num_delays; head(1), которая возвращает первую строку (т.е. авиакомпанию с наибольшим количеством задержек прибытия рейсов в 2013 году) и выводим на экран.
