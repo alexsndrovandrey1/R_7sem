@@ -24,6 +24,7 @@ library(swirl)
 swirl()
 ```
 3. Начинаем выполнение перовго учебного задания Basic Building Blocks.
+
 ![all text](img/1.png)
 ![all text](img/1_2.png)
 ![all text](img/1_3.png)
@@ -34,7 +35,8 @@ swirl()
 ![all text](img/1_8.png)
 ![all text](img/1_9.png)
 
-4. Выполяем второе учебное задание Workspace and Files.
+1. Выполяем второе учебное задание Workspace and Files.
+
 ![all text](img/2.png)
 ![all text](img/2_2.png)
 ![all text](img/2_3.png)
@@ -49,7 +51,8 @@ swirl()
 ![all text](img/2_12.png)
 ![all text](img/2_13.png)
 
-5. Выполняем третье учебное задание Sequences of Numbers.
+1. Выполняем третье учебное задание Sequences of Numbers.
+
 ![all text](img/3.png)
 ![all text](img/3_2.png)
 ![all text](img/3_3.png)
@@ -57,7 +60,8 @@ swirl()
 ![all text](img/3_5.png)
 ![all text](img/3_6.png)
 
-6. Выполняем четвертое учебное задание Vectors.
+1. Выполняем четвертое учебное задание Vectors.
+
 ![all text](img/4.png)
 ![all text](img/4_2.png)
 ![all text](img/4_3.png)
