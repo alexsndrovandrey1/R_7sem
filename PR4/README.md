@@ -294,3 +294,7 @@ head(unique_ips_periodic_requests)
 -   Провайдер Google Servers
 -   Домен 1e100.net
 -   Домен страны .us
+
+## Вывод
+
+Были изучены возможности библиотек tidyverse, readr.
