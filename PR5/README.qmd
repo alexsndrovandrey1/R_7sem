@@ -1,0 +1,140 @@
+---
+title: "Практика 5"
+format: 
+  md:
+    output-file: README.md
+editor: visual
+---
+
+#Исследование информации о состоянии беспроводных сетей.
+
+##Цель работы
+
+1.  Получить знания о методах исследования радиоэлектронной обстановки.
+
+2.  Составить представление о механизмах работы Wi-Fi сетей на канальном и сетевом уровне модели OSI.
+
+3.  Зекрепить практические навыки использования языка программирования R для обработки данных.
+
+4.  Закрепить знания основных функций обработки данных экосистемы tidyverse языка R.
+
+## Исходные данные
+
+1.  RStudio
+
+## Задания
+
+### Подготовка данных
+
+1.  Импорт данных
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+data <- read.csv("mir.csv-01.csv")
+```
+
+2.  Просмотрите общую структуру данных с помощью функции glimpse()
+
+```{r}
+glimpse(data)
+```
+
+### Анализ
+
+1.  Определить небезопасные точки доступа(без шифрования OPN)
+
+```{r}
+unsafe <- subset(data, Privacy == " OPN")
+num <- nrow(unsafe)
+cat(num)
+```
+
+```{r}
+unsafe
+```
+
+2.  Определить производителя для каждого обнаруженного устройства:
+
+-   E8:28:C1:DC:B2:52 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:B2:50 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:B2:51 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:FF:F2 - Eltex Enterprise Ltd
+-   00:25:00:FF:94:73 - Apple, Inc
+-   E8:28:C1:DD:04:52 - Eltex Enterprise Ltd
+-   E8:28:C1:DE:74:31 - Eltex Enterprise Ltd
+-   E8:28:C1:DE:74:32 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C8:32 - Eltex Enterprise Ltd
+-   E8:28:C1:DD:04:50 - Eltex Enterprise Ltd
+-   E8:28:C1:DD:04:51 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C8:30 - Eltex Enterprise Ltd
+-   E8:28:C1:DE:74:30 - Eltex Enterprise Ltd
+-   E0:D9:E3:48:FF:D2 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:B2:41 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:B2:40 - Eltex Enterprise Ltd
+-   00:26:99:F2:7A:E0 - Cisco Systems, Inc
+-   E8:28:C1:DC:B2:42 - Eltex Enterprise Ltd
+-   E8:28:C1:DD:04:40 - Eltex Enterprise Ltd
+-   E8:28:C1:DD:04:41 - Eltex Enterprise Ltd
+-   E8:28:C1:DE:47:D2 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C6:B1 - Eltex Enterprise Ltd
+-   E8:28:C1:DD:04:42 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C8:31 - Eltex Enterprise Ltd
+-   E8:28:C1:DE:47:D1 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C6:B0 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:C6:B2 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:BD:50 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:0B:B2 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:33:12 - Eltex Enterprise Ltd
+-   00:03:7A:1A:03:56 - Taiyo Yuden Co., Ltd
+-   00:03:7F:12:34:56 - Atheros Communications, Inc
+-   E0:D9:E3:49:00:B1 - Eltex Enterprise Ltd
+-   E8:28:C1:DC:BD:52 - Eltex Enterprise Ltd
+-   00:26:99:F2:7A:EF - Cisco Systems, Inc
+-   E8:28:C1:DE:47:D0 - Eltex Enterprise Ltd
+
+3.  Выявить устройства, использующие последнюю версию протокола шифрования WPA3, и названия точек доступа, реализованных на этих устройствах
+
+```{r}
+wpa3_devices <- subset(data, Privacy == " WPA3 WPA2", select = c(BSSID, ESSID, Privacy))
+wpa3_devices
+```
+
+-поняснение-
+
+4.  Отсортировать точки доступа по интервалу времени, в течении которого они находились на связи, по убыванию
+
+```{r}
+wpa3 <- subset(data, Privacy == " WPA3 WPA2")
+sorted_aps <- wpa3 %>%
+  mutate(Duration = difftime(Last.time.seen, First.time.seen, units = "secs")) %>%
+  select(ESSID, First.time.seen, Last.time.seen, Duration) %>%
+  arrange(desc(Duration))
+sorted_aps
+```
+
+Создаем список wpa3 и sorted_aps, вызываем функцию mutate, которая добавляет новую переменную Duraction и функция difftime вычисляет разницу между Last.time.seen и First.time.seen, units = "secs" - указывает, что разница должна быть в секундах, далее выбираем нужные столбцы и функцией arrange сортируем по убыванию.
+
+5.  Обнаружить топ-10 самых быстрых точек доступа
+
+```{r}
+top_10_fastest_ap <- data %>% 
+  arrange(desc(Speed)) %>% 
+  head(10) %>%
+  select(BSSID, ESSID, Speed)
+top_10_fastest_ap
+```
+
+6.  Отсортировать точки доступа по частоте отправки запросов (beacons) в единицу времени по их убыванию
+
+```{r}
+sorted_beacons_wpa3 <- wpa3 %>% 
+  select(ESSID, First.time.seen, Last.time.seen, X..beacons) %>% 
+  arrange(desc(X..beacons)) 
+sorted_beacons_wpa3 
+```
+
+## Вывод
+
+Получили знания о методах исследования радиоэлектронной обстановки, представление о механизмах работы Wi-Fi сетей на канальном и сетевом уровне модели OSI, закрепили практические навыки использования языка программирования R для обработки данных и знания о функциях обработки данных экосистемы tidyverse в R
