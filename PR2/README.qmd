@@ -28,7 +28,7 @@ editor: visual
 
 1.  Установливаем библиотеку dplyr.
 
-```         
+```{r}         
 install.packages("dplyr")
 ```
 
