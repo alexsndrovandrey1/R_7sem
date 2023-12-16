@@ -1,12 +1,14 @@
 ---
-title: "README.qmd"
-format: html
+title: "Практическая работа 1"
+format:
+  md:
+    output-file: README.md
 editor: visual
 ---
 
 ## Цель работы
 
-1.  Познакомиться с языком R посредством библиотеки  swirl.
+1.  Познакомиться с языком R посредством библиотеки swirl.
 
 ## Исходные данные
 
@@ -22,17 +24,10 @@ editor: visual
 
 ## Описание шагов
 
-1.  Установка библиотеки swirl.
-
-```         
-install.packages("swirl")
-```
-
 2.  Запускаем библиотеку.
 
-```         
+``` {r}        
 library(swirl)
-swirl()
 ```
 
 3.  Начинаем выполнение перовго учебного задания Basic Building Blocks.
