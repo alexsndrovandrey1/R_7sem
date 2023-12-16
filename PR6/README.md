@@ -1,4 +1,4 @@
-# Практика 6
+# Практическая работа 6
 
 # Исследование вредоносной активности в домене Windows
 
@@ -79,7 +79,7 @@ HTML-страниц, извлекать таблицы, тексты, ссылк
 #### Импорт данных
 
 ``` r
-data = stream_in(file('caldera_attack_evals_round1_day1_2019-10-20201108.json'))
+data <- stream_in(file('caldera_attack_evals_round1_day1_2019-10-20201108.json'))
 ```
 
     opening file input connection.
@@ -455,6 +455,14 @@ event_data <- event %>%
            Potential_Criticality = `Potential Criticality`, 
            Event_Summary = `Event Summary`))
 ```
+
+    Warning: There were 2 warnings in `mutate()`.
+    The first warning was:
+    ℹ In argument: `Current Windows Event ID = .Primitive("as.integer")(`Current
+      Windows Event ID`)`.
+    Caused by warning:
+    ! в результате преобразования созданы NA
+    ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
 
 ``` r
 event_data
