@@ -1,6 +1,6 @@
 ---
-title: "Практика 5"
-format: 
+title: "Практическая работа 5"
+format:
   md:
     output-file: README.md
 editor: visual
