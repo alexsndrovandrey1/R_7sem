@@ -26,97 +26,220 @@ editor: visual
 
 2.  Запускаем библиотеку.
 
-``` {r}        
-library(swirl)
-```
-
 3.  Начинаем выполнение перовго учебного задания Basic Building Blocks.
 
-![all text](img/1.png)
-
-![all text](img/1_2.png)
-
-![all text](img/1_3.png)
-
-![all text](img/1_4.png)
-
-![all text](img/1_5.png)
-
-![all text](img/1_6.png)
-
-![all text](img/1_7.png)
-
-![all text](img/1_8.png)
-
-![all text](img/1_9.png)
+```{r}
+5 + 7
+```
+```{r}
+x <- 5 + 7
+x
+```
+```{r}
+y <- x - 3
+y
+```
+```{r}
+z <- c(1.1, 9, 3.14)
+z
+```
+```{r}
+?c
+```
+```{r}
+z
+```
+```{r}
+c(z,555,z)
+```
+```{r}
+z * 2 + 100
+```
+```{r}
+my_sqrt <- sqrt(z-1)
+```
+```{r}
+my_sqrt
+```
+```{r}
+my_div <- z / my_sqrt
+```
+```{r}
+my_div
+```
+```{r}
+c(1,2,3,4) + c(0,10)
+```
+```{r}
+c(1,2,3,4) + c(0,10, 100)
+```
+```{r}
+z * 2 + 1000
+```
+```{r}
+my_div
+```
 
 4.  Выполяем второе учебное задание Workspace and Files.
+```{r}
+getwd()
+```
+```{r}
+ls()
+```
+```{r}
+x <- 9
+```
+```{r}
+ls()
+```
+```{r}
+dir()
+```
+```{r}
+?list.files
+```
+```{r}
+args(list.files)
+```
+```{r}
+old.dir <- getwd()
+```
+```{r}
+dir.create("testdir")
+```
+```{r}
+setwd("testdir")
+```
+```{r}
+file.create("mytest.R")
+```
+```{r}
+list.files()
+```
+```{r}
+file.exists("mytest.R")
+```
+```{r}
+file.info("mytest.R")
+```
+```{r}
+file.rename("mytest.R", "mytest2.R")
+```
+```{r}
+file.copy("mytest2.R", "mytest3.R")
+```
+```{r}
+file.path("mytest3.R")
+```
+```{r}
+file.path("folder1", "folder2")
+```
+```{r}
+?dir.create
+```
+```{r}
+dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
+```
+```{r}
+setwd(old.dir)
+```
 
-![all text](img/2.png)
-
-![all text](img/2_2.png)
-
-![all text](img/2_3.png)
-
-![all text](img/2_4.png)
-
-![all text](img/2_5.png)
-
-![all text](img/2_6.png)
-
-![all text](img/2_7.png)
-
-![all text](img/2_8.png)
-
-![all text](img/2_9.png)
-
-![all text](img/2_10.png)
-
-![all text](img/2_11.png)
-
-![all text](img/2_12.png)
-
-![all text](img/2_13.png)
 
 5.  Выполняем третье учебное задание Sequences of Numbers.
+```{r}
+1:20
+```
+```{r}
+pi : 10
+```
 
-![all text](img/3.png)
-
-![all text](img/3_2.png)
-
-![all text](img/3_3.png)
-
-![all text](img/3_4.png)
-
-![all text](img/3_5.png)
-
-![all text](img/3_6.png)
+```{r}
+15:1
+```
+```{r}
+?':'
+```
+```{r}
+seq(1,20)
+```
+```{r}
+seq(0,10, by=0.5)
+```
+```{r}
+seq(5,10, length = 30)
+```
+```{r}
+my_seq <- seq(5,10, length = 30)
+```
+```{r}
+length(my_seq)
+```
+```{r}
+1:length(my_seq)
+```
+```{r}
+seq(along.with = my_seq)
+```
+```{r}
+seq_along(my_seq)
+```
+```{r}
+rep(0, times=40)
+```
+```{r}
+rep(c(0,1,2), times = 10)
+```
+```{r}
+rep(c(0,1,2), each=10)
+```
 
 6.  Выполняем четвертое учебное задание Vectors.
-
-![all text](img/4.png)
-
-![all text](img/4_2.png)
-
-![all text](img/4_3.png)
-
-![all text](img/4_4.png)
-
-![all text](img/4_5.png)
-
-![all text](img/4_6.png)
-
-![all text](img/4_7.png)
-
-![all text](img/4_8.png)
-
-![all text](img/4_9.png)
-
-![all text](img/4_10.png)
-
-![all text](img/4_11.png)
-
-![all text](img/4_12.png)
+```{r}
+num_vect <- c(0.5, 55, 10, 6)
+```
+```{r}
+num_vect <- c(0.5, 55, -10, 6)
+```
+```{r}
+tf <- num_vect < 1
+```
+```{r}
+tf
+```
+```{r}
+tf <- num_vect >= 6
+```
+```{r}
+num_vect >= 6
+```
+```{r}
+my_char <- c("My", "name", "is")
+```
+```{r}
+my_char
+```
+```{r}
+paste(my_char, collapse = " ")
+```
+```{r}
+my_name <- c(my_char, "Alexsandrov Andrey")
+```
+```{r}
+my_name
+```
+```{r}
+paste(my_name, collapse = " ")
+```
+```{r}
+paste("Hello", "world!", sep = " ")
+```
+```{r}
+paste(1:3, c("X", "Y", "Z"), sep = "")
+```
+```{r}
+paste(LETTERS, 1:4, sep = "-")
+```
 
 ## Вывод
 
